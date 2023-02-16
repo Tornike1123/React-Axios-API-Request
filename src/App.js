@@ -1,5 +1,6 @@
 import "./App.css";
 import Create from "./components/create/Create";
+import Read from "./components/read/Read.jsx";
 
 function App() {
 	return (
@@ -9,6 +10,10 @@ function App() {
 			</div>
 			<div>
 				<Create />
+			</div>
+
+			<div>
+				<Read />
 			</div>
 		</div>
 	);
