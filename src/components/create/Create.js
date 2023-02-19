@@ -1,34 +1,31 @@
 import React, { useState } from "react";
-import { Button, Form } from "semantic-ui-react";
+import { Form, Button } from "semantic-ui-react";
 import axios from "axios";
+import { useHistory } from "react-router";
 
-const Create = () => {
+export default function Create() {
+	let history = useHistory();
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 
-	const nameHandler = (e) => {
-		setFirstName(e.target.value);
+	const sendDataToAPI = () => {
+		axios
+			.post(`https://63ee5295d466e0c18bade944.mockapi.io/Crud`, {
+				firstName,
+				lastName,
+			})
+			.then(() => {
+				history.push("/read");
+			});
 	};
-	const lastNameHandler = (e) => {
-		setLastName(e.target.value);
-	};
-
-	const sendDataToAPI = (e) => {
-		e.preventDefault();
-		axios.post(`https://63ee5295d466e0c18bade944.mockapi.io/Crud`, {
-			firstName,
-			lastName,
-		});
-	};
-
 	return (
 		<div>
-			<Form onSubmit={sendDataToAPI}>
+			<Form>
 				<Form.Field>
 					<label>First Name</label>
 					<input
 						name="fname"
-						onChange={nameHandler}
+						onChange={(e) => setFirstName(e.target.value)}
 						placeholder="First Name"
 					/>
 				</Form.Field>
@@ -36,15 +33,14 @@ const Create = () => {
 					<label>Last Name</label>
 					<input
 						name="lname"
-						onChange={lastNameHandler}
 						placeholder="Last Name"
+						onChange={(e) => setLastName(e.target.value)}
 					/>
 				</Form.Field>
-
-				<Button type="submit">Submit</Button>
+				<Button type="submit" onClick={sendDataToAPI}>
+					Submit
+				</Button>
 			</Form>
 		</div>
 	);
-};
-
-export default Create;
+}

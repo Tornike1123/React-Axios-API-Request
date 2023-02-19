@@ -18,3 +18,10 @@ Step 2: `import axios from "axios";`
 ---
 
 [REST APIs DB](https://mockapi.io)
+
+---
+
+## react router dom
+
+-   Step 1: installation: `npm i react-router-dom`
+-   Step 2: import { BrowserRouter as Router, Route } from "react-router-dom";
